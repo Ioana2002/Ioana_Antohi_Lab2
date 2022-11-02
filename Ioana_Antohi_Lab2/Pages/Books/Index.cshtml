@@ -19,6 +19,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Book[0].Author)
             </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Book[0].Price)
             </th>
@@ -27,9 +28,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Book[0].Publisher.PublisherName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Book[0].Author.FirstName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Book[0].BookCategories)
@@ -41,6 +39,18 @@
         @foreach (var item in Model.BookD.Books)
         {
             string selectedRow = "";
+            string authorName = "";
+            if (item.Author != null)
+            {
+                if (item.Author.FirstName != null)
+                {
+                    authorName = item.Author.FirstName;
+                }
+                if (item.Author.LastName != null)
+                {
+                    authorName = authorName + " " + item.Author.LastName;
+                }
+            }
             if (item.ID == Model.BookID)
             {
                 selectedRow = "table-success";
@@ -50,7 +60,7 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Author)
+                    @Html.DisplayFor(modelItem => authorName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
@@ -61,14 +71,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Publisher.PublisherName)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author.FirstName)
-                </td>
+                
                 <td>
                     @{
                         foreach (var category in item.BookCategories)
                         {
-                            @category.Category.ID @: @category.Category.CategoryName <br />
+                            @category.Category.CategoryName <br />
                         }
                     }
                 </td>

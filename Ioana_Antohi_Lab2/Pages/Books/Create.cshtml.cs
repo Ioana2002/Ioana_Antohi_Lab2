@@ -58,11 +58,12 @@ namespace Ioana_Antohi_Lab2.Pages.Books
                     newBook.BookCategories.Add(catToAdd);
                 }
             }
-            if (await TryUpdateModelAsync<Book>(
+            await TryUpdateModelAsync<Book>(
             newBook,
             "Book",
-            i => i.Title, i => i.Author,
-            i => i.Price, i => i.PublishingDate, i => i.PublisherID))
+            i => i.Title, i => i.AuthorID,
+            i => i.Price, i => i.PublishingDate, i => i.PublisherID);
+            if(newBook != null)
             {
                 _context.Book.Add(newBook);
                 await _context.SaveChangesAsync();
