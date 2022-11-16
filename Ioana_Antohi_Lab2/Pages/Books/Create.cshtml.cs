@@ -9,9 +9,12 @@ using Ioana_Antohi_Lab2.Data;
 using Ioana_Antohi_Lab2.Models;
 
 using Ioana_Antohi_Lab2.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace Ioana_Antohi_Lab2.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
     public class CreateModel : BookCategoriesPageModel
     {
         private readonly Ioana_Antohi_Lab2.Data.Ioana_Antohi_Lab2Context _context;
